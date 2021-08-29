@@ -1,10 +1,10 @@
-FROM node:alpine as build
+FROM node:alpine
 WORKDIR '/app'
 COPY package.json . 
 RUN npm install
 COPY . ./
 #RUN chown -R node.node /app
-CMD ["npm", "run", "buld"]
+CMD ["npm", "run", "build"]
 
 FROM nginx:latest
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=0 /app/build /usr/share/nginx/html
